@@ -1,0 +1,18 @@
+<style>
+    form label.error{
+        color: darkred;
+    }
+    
+</style>
+<fieldset>
+    <legend><span ng-bind="struct.name"></span></legend>
+    <form name="form" novalidate>
+        <div ng-repeat="a in struct.attributes" style="margin-bottom:16px" class="form-group">
+            <label ng-bind="a.label" ng-class="{ error: form[a.field].$invalid }"></label>
+            <input struct name="a.field" type="a.plainType"  maxlength="a.maxlength" placeholder="a.label" ng-required="a.required =='yes'" class="form-control" ng-model="object[a.field]">
+        </div>
+        <button type="button" ng-disabled="form.$invalid" ng-click="save(object)">Save</button>    
+    </form>
+</fieldset>
+<br>
+<!-- <div ng-include="'/templates/list.html'"></div> -->

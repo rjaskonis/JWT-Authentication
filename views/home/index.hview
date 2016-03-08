@@ -1,0 +1,53 @@
+<div ng-controller="home">	
+	<h3>Hello World - <span ng-bind="message"></span></h3>
+	<br>
+	<!-- <div ng-view></div> -->
+	<div ng-include="'/templates/form.html'"></div>
+	<div ng-include="'/templates/list.html'"></div>
+</div>
+
+<script type="text/javascript">
+	app.controller('home', ['$scope', '$http', 'contextFactory', function ($scope, $http, contextFactory) {
+		$scope.message = "you're very welcome!!";
+
+
+        context = contextFactory(["Person"], $scope);
+        
+        context.person.getStruct(function(data){
+        	var struct = {};
+        	struct.name = 'Person';
+        	struct.attributes = [];
+        	for(var i in data){
+        		if(data[i].hasOwnProperty('type')) 
+        			struct.attributes.push(data[i]);
+        	}
+            $scope.struct = struct;
+            $scope.object = {};
+        });
+        
+        context.person.query(function(data){
+            $scope.listObject = data; 
+        });
+                        
+        $scope.get = function(object){
+            $scope.object = angular.copy(object); // if it receives '= object' then when changing in form, changes list too
+            
+            // context.dao.get({ id : object.id}, function(data){
+            //     $scope.object = data; 
+            //  });
+        };
+        
+        $scope.save = function(object){
+            if(object.id == "") delete object.id
+            context.person.save(object, function(response){
+               console.log("Person saved!"); 
+               context.person.query(function(data) {
+                    $scope.listObject = data;
+                });  
+            }, function(response){
+                alert("Dados inválidos");
+                console.log(response);
+            });           
+        };
+	}]);
+</script>

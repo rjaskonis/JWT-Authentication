@@ -1,0 +1,19 @@
+{
+  "name": "express-mvc",
+  "description": "Express MVC 1",
+  "main": "server.js",
+  "authors": [
+    "RJ"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

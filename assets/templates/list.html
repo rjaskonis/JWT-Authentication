@@ -1,0 +1,21 @@
+<style>
+    table tr *{
+        text-align: center;
+    }
+</style>
+
+<fieldset>
+    <legend>List <span ng-bind="struct.name"></span></legend>    
+    <table class="table table-bordered table-hover">
+        <thead>        
+            <tr>
+                <th ng-repeat="a in struct.attributes" ng-if="a.prompt=='list'"><span ng-bind="a.label"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="o in listObject" ng-click="get(o)" style="cursor:pointer">            
+                <td ng-repeat="a in struct.attributes"  ng-if="a.prompt=='list'" ng-bind="o[a.field]"></td>
+            </tr>
+        </tbody>
+    </table>    
+</fieldset>
