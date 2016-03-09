@@ -7,7 +7,6 @@ var env      = process.env.NODE_ENV || "development";
 
 DbContext.Sequelize = require('sequelize');
 DbContext.sequelize = new DbContext.Sequelize('dev1', 'sa', '****', { host: "172.16.100.109", dialect: "mssql", port: "1433",  timezone: "-02:00" });
-//DbContext.sequelize = new DbContext.Sequelize('dev1', 'sa', 'Aqua12!', { host: "aquanalyze.no-ip.biz", dialect: "mssql", port: "1433",  timezone: "-02:00" });
 
 // add all models to DbContext (folder)
 fs
