@@ -13,11 +13,13 @@ module.exports.controller = function(app){
 		var key = req.body.key;
 		
 		if(key == 'access'){
-	        var token = app.jwt.sign(key, app.get('superSecret'), { expiresInMinutes: '5' });
+		var time = 60; // Seconds
+	        var token = app.jwt.sign({ xSecret: key }, app.get('superSecret'), { expiresIn: time });
+	        console.log(new Date());
 
 	        // return the information including token as JSON
 	        if(req.cookies === undefined || req.cookies.appJwt === undefined)
-	        	res.cookie("appJwt", token, {maxAge: 1000 * 60 * 1, httpOnly: true }); // 1 minutes
+	        	res.cookie("appJwt", token, {maxAge: 1000 * time * 1, httpOnly: true }); // 1 minute
 	        res.json({
 	        	success: true,
 	          	message: 'Enjoy your token!',
